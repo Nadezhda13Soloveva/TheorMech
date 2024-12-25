@@ -17,8 +17,8 @@ def update(frame):
     phi = 0.5 * np.sin(t[frame])  # Угол стержня
     
     # Более агрессивное колебание для цилиндра B
-    theta = 1.5 * np.sin(t[frame])  # Увеличенная амплитуда (1.5)
-    psi = -(R/r) * theta  # Угол вращения цилиндра B
+    psi = 1.5 * np.sin(t[frame])  # Увеличенная амплитуда (1.5)
+    theta = -(R/r) * psi  # Угол вращения цилиндра B
     
     # Координаты стержня
     rod_x = [0, l * np.sin(phi)]
@@ -29,12 +29,12 @@ def update(frame):
     center_A_y = -(l + R) * np.cos(phi)
     
     # Координаты центра цилиндра B - колеблется внизу
-    center_B_x = center_A_x + (R-r) * np.sin(theta)
-    center_B_y = center_A_y - (R-r) * np.cos(theta)
+    center_B_x = center_A_x + (R-r) * np.sin(psi)
+    center_B_y = center_A_y - (R-r) * np.cos(psi)
     
     # Добавление линии-индикатора вращения для цилиндра B
-    indicator_x = center_B_x + r * np.cos(psi)
-    indicator_y = center_B_y + r * np.sin(psi)
+    indicator_x = center_B_x + r * np.cos(theta)
+    indicator_y = center_B_y + r * np.sin(theta)
     
     # Отрисовка
     plt.plot(rod_x, rod_y, 'k-', linewidth=2)  # Стержень
